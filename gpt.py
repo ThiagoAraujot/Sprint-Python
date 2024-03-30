@@ -1,9 +1,4 @@
-consultas_marcadas = {
-    'Nome': [],
-    'Dia': [],
-    'Mês': [],
-    'Horário': []
-}
+consultas_marcadas = {}  # Dicionário para armazenar as consultas marcadas
 
 def Menu():
     while True:
@@ -57,34 +52,25 @@ def HC_options():
 
 
 def marcar_consulta():
-    consulta = {}
-    for key in consultas_marcadas:
-        consulta[key] = input(f"Digite o {key} da consulta: ")
-    consultas_marcadas['Nome'].append(consulta['Nome'])
-    consultas_marcadas['Dia'].append(consulta['Dia'])
-    consultas_marcadas['Mês'].append(consulta['Mês'])
-    consultas_marcadas['Horário'].append(consulta['Horário'])
+    paciente = input("Digite o nome do paciente: ")
+    consulta = input("Digite o horário da consulta (hh:mm): ")
+    consultas_marcadas[paciente] = consulta
     print("Consulta marcada com sucesso!")
 
 
 def ver_consultas_marcadas():
-    if consultas_marcadas['Nome']:
+    if consultas_marcadas:
         print("Consultas Marcadas:")
-        for i in range(len(consultas_marcadas['Nome'])):
-            consulta = {}
-            for key in consultas_marcadas:
-                consulta[key] = consultas_marcadas[key][i]
-            print(f"Paciente: {consulta['Nome']} - Data da Consulta: {consulta['Dia']}/{consulta['Mês']} - Horário da Consulta: {consulta['Horário']}")
+        for paciente, consulta in consultas_marcadas.items():
+            print(f"Paciente: {paciente} - Horário da Consulta: {consulta}")
     else:
         print("Não há consultas marcadas no momento.")
 
 
 def cancelar_consulta():
-    nome = input("Digite o nome do paciente para cancelar a consulta: ")
-    if nome in consultas_marcadas['Nome']:
-        index = consultas_marcadas['Nome'].index(nome)
-        for key in consultas_marcadas:
-            consultas_marcadas[key].pop(index)
+    paciente = input("Digite o nome do paciente para cancelar a consulta: ")
+    if paciente in consultas_marcadas:
+        del consultas_marcadas[paciente]
         print("Consulta cancelada com sucesso!")
     else:
         print("Paciente não tem consulta marcada.")
@@ -92,10 +78,3 @@ def cancelar_consulta():
 
 if __name__ == "__main__":
     Menu()
-    Menu()
-valid_name()
-valid_age()
-HC_options()
-marcar_consulta()
-ver_consultas_marcadas()
-cancelar_consulta()
