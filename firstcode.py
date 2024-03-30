@@ -24,26 +24,27 @@ def valid_age(msg):
 
 
 def HC_options():
-    options_dict = {1: "Marcar Consulta",
-                    2: "Ver Consultas Marcadas",
-                    3: "Cancelar Consulta",
-                    4: "Sair"
-                    }
-    for key in options_dict:
-        print(f"{key} - {options_dict[key]}")
-    option = input("Escolha o número da opção desejada: ")
-    match option:
-        case "1":
-            marcar_consulta()
-        case "2":
-            ver_consultas_marcadas()
-        case "3":
-            cancelar_consulta()
-        case "4":
-            print("Saindo do sistema. Até mais!")
-            exit()
-        case _:
-            print("Opção inválida.")
+    while True:
+        options_dict = {1: "Marcar Consulta",
+                        2: "Ver Consultas Marcadas",
+                        3: "Cancelar Consulta",
+                        4: "Sair"
+                        }
+        for key in options_dict:
+            print(f"{key} - {options_dict[key]}")
+        option = input("Escolha o número da opção desejada: ")
+        match option:
+            case "1":
+                marcar_consulta()
+            case "2":
+                ver_consultas_marcadas()
+            case "3":
+                cancelar_consulta()
+            case "4":
+                print("Saindo do sistema. Até mais!")
+                exit()
+            case _:
+                print("Opção inválida.")
 
 dic_consulta = {
         'Exame': [],
@@ -103,8 +104,6 @@ def marcar_consulta():
     dic_consulta['Horário'].append(horario)
 
     print("--Sua consulta foi solicitada, aguarde nossa confirmação por e-mail--")
-    
-    HC_options()
     return
 
 
@@ -125,7 +124,22 @@ def ver_consultas_marcadas():
     return
 
 def cancelar_consulta():
-    pass
+    print("---Cancelar Consulta---")
+    for exame in dic_consulta['Exame']:
+        if not exame:
+            print("Não há consultas marcadas no momento.")
+            return
+        else:
+            print(f"Consulta: {exame}")
+    option = input("Digite o Nome do exame que deseja cancelar: ")
+    for i in range(len(dic_consulta['Exame'])):
+        if dic_consulta['Exame'][i] == option:
+            index = i
+            for key in dic_consulta:
+                dic_consulta[key].pop(index)
+            print("Consulta cancelada com sucesso!")
+    return
+
 
 def valida_dia(msg):
     dia = input(msg)
