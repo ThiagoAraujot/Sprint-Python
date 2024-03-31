@@ -12,7 +12,6 @@ def valid_name(msg):
     return name
     
 
-
 def valid_age(msg):
     age = input(msg)
     while age.isnumeric() == False:
@@ -109,11 +108,11 @@ def marcar_consulta():
 
 def ver_consultas_marcadas():
     print("---Consultas Marcadas---")
-    for exame in dic_consulta['Exame']:
-        if not exame:
+    if len(dic_consulta['Exame']) < 1:
             print("Não há consultas marcadas no momento.")
             return
-        else:
+    else:
+        for exame in dic_consulta['Exame']:
             print(f"Consulta: {exame}")
     option = input("Digite o Nome do exame que deseja ver:")
     for i in range(len(dic_consulta['Exame'])):
