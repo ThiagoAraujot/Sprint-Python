@@ -107,7 +107,7 @@ def marcar_consulta():
     mes = valida_mes("Digite o mês da consulta: ")
     dic_consulta['Mês'].append(mes)
 
-    horario = valida_mes("Digite o horário da consulta: ")
+    horario = valida_horario("Digite o horário da consulta: ")
     dic_consulta['Horário'].append(horario)
 
     print("--Sua consulta foi solicitada, aguarde nossa confirmação por e-mail--")
